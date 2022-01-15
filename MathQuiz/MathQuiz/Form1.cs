@@ -47,7 +47,14 @@ namespace MathQuiz
 
     private void timer1_Tick(object sender, EventArgs e)
     {
-      if (timeLeft > 0)
+      if (CheckTheAnswer())
+      {
+        timer1.Stop();
+        MessageBox.Show("You got all the answers right!",
+          "Congratulations!");
+        startButton.Enabled = true;
+      }
+      else if (timeLeft > 0)
       {
         timeLeft = timeLeft - 1;
         timeLabel.Text = timeLeft + " seconds";
@@ -60,6 +67,14 @@ namespace MathQuiz
         sum.Value = addend1 + addend2;
         startButton.Enabled = true;
       }
+    }
+
+    private bool CheckTheAnswer()
+    {
+      if (addend1 + addend2 == sum.Value)
+        return true;
+      else
+        return false;
     }
   }
 }
